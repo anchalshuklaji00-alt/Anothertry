@@ -26,7 +26,7 @@ from google.protobuf.internal import builder as _builder
 ####################################
 app = Flask(__name__)
 ###########FREE-FIRE-VERSION###########
-freefire_version = "ob48"
+freefire_version = "ob52"
 #############KEY-AES-CBC#############
 key = bytes([89, 103, 38, 116, 99, 37, 68, 69, 117, 104, 54, 37, 90, 99, 94, 56])
 iv = bytes([54, 111, 121, 90, 68, 114, 50, 50, 69, 51, 121, 99, 104, 106, 77, 37])
