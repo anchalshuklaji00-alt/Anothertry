@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message MyData {
+  uint32 field1 = 1;  // الحقل الأول (القيمة Id)
+  uint32 field2 = 2;  // الحقل الثاني (القيمة 1)
+}
