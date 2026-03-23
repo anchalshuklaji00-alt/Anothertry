@@ -11,7 +11,7 @@ headers = {
     'Expect': "100-continue",
     'Authorization': f"Bearer {token}",
     'X-GA': "v1 1",
-    'ReleaseVersion': "OB48"
+    'ReleaseVersion': "OB52"
 }
 response = requests.post(api, data=payload, headers=headers)
 guest = response.content.hex()
