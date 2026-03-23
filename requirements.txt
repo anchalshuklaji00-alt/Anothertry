@@ -1,0 +1,11 @@
+flask
+requests
+re
+binascii
+pycryptodome
+datetime
+urllib3
+concurrent.futures
+threading
+protobuf
+protobuf_decoder
