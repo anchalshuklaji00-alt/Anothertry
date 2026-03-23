@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message MyMessage {
+  string field2 = 2;
+  int32 field3 = 3;
+  int32 field5 = 5;
+  bytes field6 = 6;
+  bytes field8 = 8;
+}
