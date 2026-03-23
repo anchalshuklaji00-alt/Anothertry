@@ -13,7 +13,7 @@ import time
 import re
 ####################################
 app = Flask(__name__)
-freefire_version = "ob48"
+freefire_version = "ob52"
 APIS_KEYS = ["CdxGfoxProjext1kmembers", "nikmok"]
 ##########PLAYER INFO################
 jwt_token = None
