@@ -137,7 +137,7 @@ def add_item(token, encrypted_payload):
     return response.status_code, response.text
 
 # إعداد البوت
-TOKEN = "7398002520:AAFDLNKxiqsua7Wxhr5V5kmD8huTXbGETMc"
+TOKEN = "8631579637:AAEQUi0msNC9-KSnpYpMSmmi97z-Cd8oX78"
 bot = telebot.TeleBot(TOKEN)
 
 # تعريف الأوامر
