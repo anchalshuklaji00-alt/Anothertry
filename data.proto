@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package example;
+
+message NestedSix {
+  int32 six = 6;  // الحقل 6
+}
+
+message InnerData {
+  int32 one = 1;  // الحقل 1
+  int32 two = 2;  // الحقل 2
+  int32 three = 3;  // الحقل 3
+  int32 four = 4;  // الحقل 4
+  int32 five = 5;  // الحقل 5
+  NestedSix six = 6;  // الحقل 6 (كائن متداخل)
+}
+
+message NestedData {
+  int32 one = 1;  // الحقل 1
+  repeated InnerData two = 2;  // الحقل 2 (مصفوفة من InnerData)
+}
+
+message Data {
+  int32 one = 1;  // الحقل 1
+  repeated NestedData two = 2;  // الحقل 2 (مصفوفة من NestedData)
+}

@@ -1,0 +1,67 @@
+import json
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+import data_pb2  # بعد ترجمة ملف .proto إلى Python
+
+# Key and IV
+key = bytes([89, 103, 38, 116, 99, 37, 68, 69, 117, 104, 54, 37, 90, 99, 94, 56])
+iv = bytes([54, 111, 121, 90, 68, 114, 50, 50, 69, 51, 121, 99, 104, 106, 77, 37])
+
+# إنشاء الكائن الرئيسي من الرسالة Data
+data = data_pb2.Data()
+data.one = 1  # تعيين الحقل 1
+
+# إنشاء الكائن الأول في المصفوفة two
+entry_1 = data.two.add()
+entry_1.one = 1  # تعيين الحقل 1
+
+# إضافة العناصر إلى المصفوفة two داخل entry_1
+for item in [
+    {"one": 2, "six": {"six": 805000000}},
+    {"one": 2, "five": 2, "six": {"six": 805000000}},
+    {"one": 2, "five": 4, "six": {"six": 805000000}},
+    {"one": 2, "four": 2, "six": {"six": 805000000}},
+    {"one": 2, "four": 2, "five": 2, "six": {"six": 805000000}},
+    {"one": 2, "four": 2, "five": 4, "six": {"six": 805000000}},
+    {"one": 2, "three": 1, "four": 2, "six": {"six": 805000000}},
+    {"one": 2, "three": 1, "five": 2, "six": {"six": 805000000}},
+    {"one": 2, "three": 1, "five": 4, "six": {"six": 805000000}},
+    {"one": 2, "three": 1, "four": 2, "five": 2, "six": {"six": 805000000}},
+    {"one": 2, "three": 1, "four": 4, "six": {"six": 805000000}},
+    {"one": 9, "two": 9, "three": 1, "four": 4, "five": 2, "six": {"six": 805000000}},
+]:
+    nested_item = entry_1.two.add()
+    nested_item.one = item.get("one", 0)
+    nested_item.two = item.get("two", 0)
+    nested_item.three = item.get("three", 0)
+    nested_item.four = item.get("four", 0)
+    nested_item.five = item.get("five", 0)
+    nested_item.six.six = item["six"]["six"]
+
+# إنشاء الكائن الثاني في المصفوفة two
+entry_2 = data.two.add()
+entry_2.one = 5  # تعيين الحقل 1
+
+# إنشاء كائن InnerData وإضافته إلى entry_2
+inner_data = entry_2.two.add()
+inner_data.three = 1  # تعيين الحقل 3
+inner_data.four = 6  # تعيين الحقل 4
+
+# تحويل الكائن إلى بايتات
+data_bytes = data.SerializeToString()
+
+# Padding البيانات لتكون مناسبة لحجم بلوك AES
+padded_data = pad(data_bytes, AES.block_size)
+
+# إنشاء AES cipher في وضع CBC
+cipher = AES.new(key, AES.MODE_CBC, iv)
+
+# تشفير البيانات
+encrypted_data = cipher.encrypt(padded_data)
+
+# تنسيق البيانات المشفرة كـ hex مع مسافات بين البايتات
+formatted_encrypted_data = ' '.join([f"{byte:02X}" for byte in encrypted_data])
+
+# طباعة البيانات المشفرة
+print("Encrypted data in the desired format:")
+print(formatted_encrypted_data)
